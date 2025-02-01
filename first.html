@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+       *
+       {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+       }
+       html,body{
+        width: 100%;
+        height: 100%;
+        background-color: rgb(44, 62, 80);
+       }
+        .parent
+        {
+            width: 800px;
+            box-shadow: 0px 0px 1px grey;
+            padding: 10px;
+            margin:50px auto;
+            background-color: white;
+            border-radius: 20px;
+        }
+        input
+        {
+            width: 100%;
+            height: 30px;
+            outline:none;
+            border-radius: 4px;
+            padding: 5px;
+        }
+        .form-info
+        {
+            padding: 20px;
+        }
+        button{
+            padding: 5px;
+            background-color: black;
+            color: red;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .msg
+        {
+            color: green;
+            font-size: 10px;
+        }
+        .invalid 
+        {
+            color: red !important;
+        }
+    </style>
+</head>
+<body>
+<!-- RegEx => Regular Expression -->
+<div class="parent">
+<form action="index.html" id="form-detail">
+<div class="form-info">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name">
+    <span class="msg"></span>
+</div>
+<div class="form-info">
+    <label for="email">Email</label>
+    <input type="text" name="email" id="email">
+    <span class="msg"></span>
+</div>
+<div class="form-info">
+    <label for="name">Password</label>
+    <input type="password" name="password" id="password">
+    <span class="msg"></span>
+</div>
+<div class="form-info">
+    <label for="confirm_pass">Confirm Password</label>
+    <input type="text" name="confirm_pass" id="confirm_pass">
+    <span class="msg"></span>
+</div>
+<div class="form-info">
+    <button type="submit">Save</button>
+</div>
+</form>
+</div>
+<script>
+    var form_detail = document.querySelector("#form-detail");
+     var passBox = document.querySelector("input#password");
+     var confPassbox = document.querySelector("input#confirm_pass");
+     passBox.addEventListener("keyup",matchpass);
+     confPassbox.addEventListener("keyup",matchpass);
+
+     function matchpass()
+     {
+        if(confPassbox.value == passBox.value)
+           {
+            confPassbox.nextElementSibling.innerText="Looks perfect";
+            confPassbox.nextElementSibling.classList.remove("invalid");
+           }
+           else
+           {
+            confPassbox.nextElementSibling.innerText="password must match";
+            confPassbox.nextElementSibling.classList.add("invalid");
+          
+           }
+     }
+    form_detail.addEventListener(
+        "submit",
+        function(e)
+        {
+           var nameInp = e.target.name;
+           var emailInp = e.target.email;
+           var passInp = e.target.password;
+           var Conf_password = e.target.confirm_pass;
+           if(nameInp.value.trim() == '')
+           {
+            nameInp.nextElementSibling.innerText="please enter name";
+            nameInp.nextElementSibling.classList.add("invalid");
+            e.preventDefault();
+
+
+           }
+           else{
+            nameInp.nextElementSibling.innerText="Looks perfect";
+            nameInp.nextElementSibling.classList.remove("invalid");
+           }
+           if(emailInp.value.trim() == '')
+           {
+            emailInp.nextElementSibling.innerText="please enter your email";
+            emailInp.nextElementSibling.classList.add("invalid");
+            e.preventDefault();
+           }
+           else{
+            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if(emailRegex.test(emailInp.value)==true)
+           {
+            emailInp.nextElementSibling.innerText="Looks perfect";
+            emailInp.nextElementSibling.classList.remove("invalid");
+
+           }
+           else{
+            emailInp.nextElementSibling.innerText="please enter a valid email";
+            emailInp.nextElementSibling.classList.add("invalid");
+            e.preventDefault();
+
+           }
+           }
+           if(passInp.value.trim() == '')
+           {
+            passInp.nextElementSibling.innerText="please enter password";
+            passInp.nextElementSibling.classList.add("invalid");
+            e.preventDefault();
+           }
+           else{
+            var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+            if(passRegex.test(passInp.value) == true)
+           {
+            passInp.nextElementSibling.innerText="Looks perfect";
+            passInp.nextElementSibling.classList.remove("invalid");
+           }
+           else
+           {
+            passInp.nextElementSibling.innerText="Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, and a number.";
+            passInp.nextElementSibling.classList.add("invalid");
+            e.preventDefault();
+           }
+           
+           }
+           if(Conf_password.value.trim() == '')
+           {
+            Conf_password.nextElementSibling.innerText="please enter confirm password";
+            Conf_password.nextElementSibling.classList.add("invalid");
+           }
+           else
+           {
+            if(Conf_password.value == passInp.value)
+           {
+            Conf_password.nextElementSibling.innerText="Looks perfect";
+            Conf_password.nextElementSibling.classList.remove("invalid");
+           }
+           else
+           {
+            Conf_password.nextElementSibling.innerText="password must match";
+            Conf_password.nextElementSibling.classList.add("invalid");
+            e.preventDefault();
+           }
+      
+           }
+        }
+    );
+</script>
+</body>
+</html>
