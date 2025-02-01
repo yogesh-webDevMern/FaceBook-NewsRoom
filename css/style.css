@@ -548,6 +548,10 @@ line-height: 19px;
     visibility: visible;
     opacity: 1;
 }
+.nav{
+    background-color: black;
+    color: white;
+}
 .mega-menu-part1
 {
     width: 500px;
