@@ -102,7 +102,7 @@
 
 .img-top-stories img
 {
-    width: 100%;
+    width: 98%;
     height: 100%;
 }
 .part2-website
@@ -148,7 +148,7 @@ height: 150px;
 .meta-quest-image
 {
     order: -1;
-    width: 400px;
+    width: 338px;
     height: 270px
 }
 .meta-quest-image img{
@@ -549,7 +549,7 @@ margin-right: 50px;
 }
 .meta-quest-image img
 {
-    width: 100%;
+    width: 50%;
     height: 100%;
 }
 .meta-quest3s-heading{
